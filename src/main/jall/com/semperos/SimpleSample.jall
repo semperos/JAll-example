@@ -1,0 +1,40 @@
+package com.semperos;
+
+import java.lang.System;
+import java.util.List;
+import java.util.ArrayList;
+
+public class SimpleExample {
+
+    public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
+        !def_clojure say-hello-to-everyone-loudly:void(arr-of-names : java.util.List<java.lang.String>, punctuation : String) {{
+            (let [names (map #(.toUpperCase %) arr-of-names)]
+              (doseq [n names]
+                (println (str "Hello, " n punctuation))))
+        }}
+        !clj_say-hello-to-everyone-loudly(names, "!!!");
+    }
+
+    public static Integer squareThenDivideByTwo(Integer x) {
+        !def_ruby square_nums : Integer (x : Integer) {{
+            x * x
+        }}
+        Integer aSquare = !rb_square_nums(x);
+        return aSquare / 2;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("");
+        System.out.println("    SIMPLE SAMPLE");
+        System.out.println("");
+        ArrayList<String> ns = new ArrayList<String>();
+        ns.add("Martin");
+        ns.add("Niles");
+        ns.add("Frasier");
+
+        !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+
+        Integer x = squareThenDivideByTwo(9);
+        System.out.println("Your number is " + x);
+    }
+}

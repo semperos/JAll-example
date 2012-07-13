@@ -1,0 +1,89 @@
+package com.semperos;
+
+import java.util.List;
+import java.util.ArrayList;
+!import_clj{{
+    (:use [incanter core stats charts]
+          [clojure.string :only [upper-case]])
+}}
+!import_rb{{
+    require 'nokogiri'
+}}
+
+!helper_clj{{
+    (defn try-me
+      []
+      (println "I'm a Clojure HELPER FUNCTION"))
+}}
+
+!helper_rb{{
+    def try_me
+      puts "I'm a Ruby HELPER METHOD"
+    end
+
+    def self.static_me
+      puts "I'm a 'static' or class-level Ruby HELPER METHOD!!"
+    end
+}}
+
+public class AdvancedExample {
+
+    public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
+        !def_clojure say-hello-to-everyone-loudly:void(arr-of-names : java.util.List<java.lang.String>, punctuation : String) {{
+            (try-me)
+            (let [names (map #(upper-case %) arr-of-names)]
+              (doseq [n names]
+                (println (str "Hello, " n punctuation))))
+        }}
+        !clj_say-hello-to-everyone-loudly(names, "!!!");
+    }
+
+    public static Integer squareThenDivideByTwo(Integer x) {
+        !def_ruby square_nums : Integer (x : Integer) {{
+            x * x
+        }}
+        Integer aSquare = !rb_square_nums(x);
+        return aSquare / 2;
+    }
+
+    !def_rb widget_xml : void () {{
+        self.try_me
+        AdvancedExampleRb.static_me
+                builder = Nokogiri::XML::Builder.new do |xml|
+                xml.root {
+            xml.products {
+                xml.widget {
+                    xml.id_ "awesome-widget-1"
+                    xml.name "Awesome widget"
+                }
+            }
+        }
+        end
+        puts builder.to_xml
+    }}
+
+    !def_clj demo-incanter : void () {{
+        (view (histogram (sample-normal 1000)))
+    }}
+
+    public static void main(String[] args) {
+        System.out.println("");
+        System.out.println("    ADVANCED SAMPLE");
+        System.out.println("");
+        ArrayList<String> ns = new ArrayList<String>();
+        ns.add("Martin");
+        ns.add("Niles");
+        ns.add("Frasier");
+
+        !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+
+        Integer x = squareThenDivideByTwo(9);
+        System.out.println("Your number is " + x);
+
+        System.out.println("Printing widget XML...");
+        !rb_widget_xml();
+
+        System.out.println("Swing time!!");
+        !clj_demo-incanter();
+    }
+}
