@@ -69,6 +69,7 @@ public class AdvancedExample {
     public static void main(String[] args) {
         System.out.println("");
         System.out.println("    ADVANCED SAMPLE");
+        System.out.println("    ===============");
         System.out.println("");
         ArrayList<String> ns = new ArrayList<String>();
         ns.add("Martin");

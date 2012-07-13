@@ -27,6 +27,7 @@
 
     <build>
         <plugins>
+            <!-- Compile JAll snippets and auto-generate necessary code -->
             <plugin>
                 <groupId>com.semperos</groupId>
                 <artifactId>jall-maven-plugin</artifactId>
@@ -45,7 +46,7 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
                 <executions>
-                    <!-- This simply compiles Java Interfaces needed by Clojure compilation -->
+                    <!-- Compile auto-generated Java interfaces require by Clojure -->
                     <execution>
                         <id>compile-java-support-files</id>
                         <phase>${javaSupportPhase}</phase>
@@ -61,7 +62,7 @@
                     </execution>
                     <!-- This allows us to easily add target/rubygems to the classpath so JRuby executes successfully -->
                     <execution>
-                        <id>run-sample-class</id>
+                        <id>run-example-class</id>
                         <phase>test</phase>
                         <configuration>
                             <tasks>
@@ -75,6 +76,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Add final transformed Java to list of sources for normal compilation phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -94,6 +96,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Compile auto-generated Clojure code -->
             <plugin>
                 <groupId>com.theoryinpractise</groupId>
                 <artifactId>clojure-maven-plugin</artifactId>
@@ -114,6 +117,23 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Make Gem dependencies retrievable like Maven ones -->
+            <plugin>
+                <groupId>de.saumya.mojo</groupId>
+                <artifactId>gem-maven-plugin</artifactId>
+                <version>0.28.4</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>jruby-dependencies</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>initialize</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Compile auto-generated JRuby code -->
             <plugin>
                 <groupId>de.saumya.mojo</groupId>
                 <artifactId>jruby-maven-plugin</artifactId>
@@ -129,24 +149,6 @@
                         </configuration>
                         <goals>
                             <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>de.saumya.mojo</groupId>
-                <artifactId>gem-maven-plugin</artifactId>
-                <version>0.28.4</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>jruby-dependencies</id>
-                        <phase>initialize</phase>
-                        <!--<configuration>-->
-                            <!--<gemHome>target/classes</gemHome>-->
-                        <!--</configuration>-->
-                        <goals>
-                            <goal>initialize</goal>
                         </goals>
                     </execution>
                 </executions>
