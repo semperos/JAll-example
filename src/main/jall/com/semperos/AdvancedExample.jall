@@ -9,13 +9,15 @@ import java.util.ArrayList;
 !import_rb{{
     require 'nokogiri'
 }}
+!import_sc{{
+  import java.io.{FileInputStream, File}
+}}
 
 !helper_clj{{
     (defn try-me
       []
       (println "I'm a Clojure HELPER FUNCTION"))
 }}
-
 !helper_rb{{
     def try_me
       puts "I'm a Ruby HELPER METHOD"
@@ -24,6 +26,11 @@ import java.util.ArrayList;
     def self.static_me
       puts "I'm a 'static' or class-level Ruby HELPER METHOD!!"
     end
+}}
+!helper_sc{{
+  def tryMe() {
+    println("Scala helper method")
+  }
 }}
 
 public class AdvancedExample {
@@ -44,6 +51,14 @@ public class AdvancedExample {
         }}
         Integer aSquare = !rb_square_nums(x);
         return aSquare / 2;
+    }
+
+    public static Integer timesEight(Integer x) {
+        !def_sc timesEight : Integer (x : Integer) {{
+          x * 8
+        }}
+        Integer myNum = !sc_timesEight(x);
+        return myNum;
     }
 
     !def_rb widget_xml : void () {{
@@ -79,7 +94,10 @@ public class AdvancedExample {
         !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
 
         Integer x = squareThenDivideByTwo(9);
-        System.out.println("Your number is " + x);
+        System.out.println("9 squared then divided by two from Ruby is " + x);
+
+        Integer y = timesEight(9);
+        System.out.println("9 * 8 from Scala is " + y);
 
         System.out.println("Printing widget XML...");
         !rb_widget_xml();
