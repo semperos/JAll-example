@@ -195,7 +195,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Dependencies for AJVM Code -->
+        <!-- Dependencies for AJVM code here -->
         <dependency>
             <groupId>rubygems</groupId>
             <artifactId>nokogiri</artifactId>
