@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class IntermediateExample {
 
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
-        !def_clojure say-hello-to-everyone-loudly:void(arr-of-names : java.util.List<java.lang.String>, punctuation : String) {{
+        !def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (let [names (map #(upper-case %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
@@ -22,14 +22,14 @@ public class IntermediateExample {
     }
 
     public static Integer squareThenDivideByTwo(Integer x) {
-        !def_ruby square_nums : Integer (x : Integer) {{
+        !def_ruby square_nums(x : Integer) : Integer {{
             x * x
         }}
         Integer aSquare = !rb_square_nums(x);
         return aSquare / 2;
     }
 
-    !def_rb widget_xml : void () {{
+    !def_rb widget_xml() : void {{
         builder = Nokogiri::XML::Builder.new do |xml|
         xml.root {
           xml.products {
@@ -43,7 +43,7 @@ public class IntermediateExample {
         puts builder.to_xml
     }}
 
-    !def_clj demo-incanter : void () {{
+    !def_clj demo-incanter() : void {{
         (view (histogram (sample-normal 1000)))
     }}
 
