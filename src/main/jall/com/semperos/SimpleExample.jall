@@ -17,19 +17,19 @@ import java.util.ArrayList;
 public class SimpleExample {
 
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
-        !def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
+        $def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (let [names (map #(.toUpperCase %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
         }}
-        !clj_say-hello-to-everyone-loudly(names, "!!!");
+        $clj_say-hello-to-everyone-loudly(names, "!!!");
     }
 
     public static Integer squareThenDivideByTwo(Integer x) {
-        !def_ruby square_nums (x : Integer) : Integer {{
+        $def_ruby square_nums (x : Integer) : Integer {{
             x * x
         }}
-        Integer aSquare = !rb_square_nums(x);
+        Integer aSquare = $rb_square_nums(x);
         return aSquare / 2;
     }
 
@@ -43,7 +43,7 @@ public class SimpleExample {
         ns.add("Niles");
         ns.add("Frasier");
 
-        !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+        $clj_say-hello-to-everyone-loudly(ns, "!!!!!");
 
         Integer x = squareThenDivideByTwo(9);
         System.out.println("Your number is " + x);

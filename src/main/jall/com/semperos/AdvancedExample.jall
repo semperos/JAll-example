@@ -12,23 +12,23 @@ package com.semperos;
 
 import java.util.List;
 import java.util.ArrayList;
-!import_clj{{
+$import_clj{{
     (:use [incanter core stats charts]
           [clojure.string :only [upper-case]])
 }}
-!import_rb{{
+$import_rb{{
     require 'nokogiri'
 }}
-!import_sc{{
+$import_sc{{
   import java.io.{FileInputStream, File}
 }}
 
-!helper_clj{{
+$helper_clj{{
     (defn try-me
       []
       (println "I'm a Clojure HELPER FUNCTION"))
 }}
-!helper_rb{{
+$helper_rb{{
     def try_me
       puts "I'm a Ruby HELPER METHOD"
     end
@@ -37,7 +37,7 @@ import java.util.ArrayList;
       puts "I'm a 'static' or class-level Ruby HELPER METHOD!!"
     end
 }}
-!helper_sc{{
+$helper_sc{{
   def tryMe() {
     println("Scala helper method")
   }
@@ -46,32 +46,32 @@ import java.util.ArrayList;
 public class AdvancedExample {
 
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
-        !def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
+        $def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (try-me)
             (let [names (map #(upper-case %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
         }}
-        !clj_say-hello-to-everyone-loudly(names, "!!!");
+        $clj_say-hello-to-everyone-loudly(names, "!!!");
     }
 
     public static Integer squareThenDivideByTwo(Integer x) {
-        !def_ruby square_nums(x : Integer) : Integer {{
+        $def_ruby square_nums(x : Integer) : Integer {{
             x * x
         }}
-        Integer aSquare = !rb_square_nums(x);
+        Integer aSquare = $rb_square_nums(x);
         return aSquare / 2;
     }
 
     public static Integer timesEight(Integer x) {
-        !def_sc timesEight(x : Integer) : Integer {{
+        $def_sc timesEight(x : Integer) : Integer {{
           x * 8
         }}
-        Integer myNum = !sc_timesEight(x);
+        Integer myNum = $sc_timesEight(x);
         return myNum;
     }
 
-    !def_rb widget_xml() : void {{
+    $def_rb widget_xml() : void {{
         self.try_me
         AdvancedExampleRb.static_me
                 builder = Nokogiri::XML::Builder.new do |xml|
@@ -87,7 +87,7 @@ public class AdvancedExample {
         puts builder.to_xml
     }}
 
-    !def_clj demo-incanter() : void {{
+    $def_clj demo-incanter() : void {{
         (view (histogram (sample-normal 1000)))
     }}
 
@@ -101,7 +101,7 @@ public class AdvancedExample {
         ns.add("Niles");
         ns.add("Frasier");
 
-        !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+        $clj_say-hello-to-everyone-loudly(ns, "!!!!!");
 
         Integer x = squareThenDivideByTwo(9);
         System.out.println("9 squared then divided by two from Ruby is " + x);
@@ -110,9 +110,9 @@ public class AdvancedExample {
         System.out.println("9 * 8 from Scala is " + y);
 
         System.out.println("Printing widget XML...");
-        !rb_widget_xml();
+        $rb_widget_xml();
 
         System.out.println("Swing time!!");
-        !clj_demo-incanter();
+        $clj_demo-incanter();
     }
 }

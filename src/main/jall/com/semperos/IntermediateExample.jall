@@ -12,34 +12,34 @@ package com.semperos;
 
 import java.util.List;
 import java.util.ArrayList;
-!import_clj{{
+$import_clj{{
     (:use [incanter core stats charts]
           [clojure.string :only [upper-case]])
 }}
-!import_rb{{
+$import_rb{{
     require 'nokogiri'
 }}
 
 public class IntermediateExample {
 
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
-        !def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
+        $def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (let [names (map #(upper-case %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
         }}
-        !clj_say-hello-to-everyone-loudly(names, "!!!");
+        $clj_say-hello-to-everyone-loudly(names, "!!!");
     }
 
     public static Integer squareThenDivideByTwo(Integer x) {
-        !def_ruby square_nums(x : Integer) : Integer {{
+        $def_ruby square_nums(x : Integer) : Integer {{
             x * x
         }}
-        Integer aSquare = !rb_square_nums(x);
+        Integer aSquare = $rb_square_nums(x);
         return aSquare / 2;
     }
 
-    !def_rb widget_xml() : void {{
+    $def_rb widget_xml() : void {{
         builder = Nokogiri::XML::Builder.new do |xml|
         xml.root {
           xml.products {
@@ -53,7 +53,7 @@ public class IntermediateExample {
         puts builder.to_xml
     }}
 
-    !def_clj demo-incanter() : void {{
+    $def_clj demo-incanter() : void {{
         (view (histogram (sample-normal 1000)))
     }}
 
@@ -67,15 +67,15 @@ public class IntermediateExample {
         ns.add("Niles");
         ns.add("Frasier");
 
-        !clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+        $clj_say-hello-to-everyone-loudly(ns, "!!!!!");
 
         Integer x = squareThenDivideByTwo(9);
         System.out.println("Your number is " + x);
 
         System.out.println("Printing widget XML...");
-        !rb_widget_xml();
+        $rb_widget_xml();
 
         System.out.println("Swing time!!");
-        !clj_demo-incanter();
+        $clj_demo-incanter();
     }
 }
