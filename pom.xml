@@ -38,7 +38,7 @@
                         <version>2.3</version>
                         <executions>
                             <execution>
-                                <id>executable-jar-with-dependencies</id>
+                                <id>executable-with-dependencies</id>
                                 <phase>package</phase>
                                 <configuration>
                                     <descriptors>
