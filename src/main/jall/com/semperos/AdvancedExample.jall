@@ -21,12 +21,23 @@ $import_rb{{
 }}
 $import_sc{{
   import java.io.{FileInputStream, File}
+  import scala.collection.immutable.List
+}}
+
+$state_clj nameOfState {{
+  (ref {:foo "bar" :langs #{:clojure :jruby :scala}})
+}}
+$state_rb name_of_state {{
+  {:foo => "bar", :langs => [:clojure, :jruby, :scala]}
+}}
+$state_sc nameOfState : scala.collection.immutable.List[String] {{
+  List("clojure", "jruby", "scala")
 }}
 
 $helper_clj{{
-    (defn try-me
-      []
-      (println "I'm a Clojure HELPER FUNCTION"))
+  (defn try-me
+    []
+    (println "Clojure helper function"))
 }}
 $helper_rb{{
     def try_me
@@ -48,6 +59,7 @@ public class AdvancedExample {
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
         $def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (try-me)
+            (println (str "Foo from mutable state is: " (:foo @(.nameOfState this))))
             (let [names (map #(upper-case %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
@@ -57,6 +69,7 @@ public class AdvancedExample {
 
     public static Integer squareThenDivideByTwo(Integer x) {
         $def_ruby square_nums(x : Integer) : Integer {{
+            p @name_of_state
             x * x
         }}
         Integer aSquare = $rb_square_nums(x);
@@ -65,6 +78,9 @@ public class AdvancedExample {
 
     public static Integer timesEight(Integer x) {
         $def_sc timesEight(x : Integer) : Integer {{
+          for (technology <- nameOfState) {
+            println("We support: " + technology)
+          }
           x * 8
         }}
         Integer myNum = $sc_timesEight(x);
