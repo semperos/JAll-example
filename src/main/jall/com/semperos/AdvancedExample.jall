@@ -25,7 +25,7 @@ $import_sc{{
 }}
 
 $state_clj nameOfState {{
-  (ref {:foo "bar" :langs #{:clojure :jruby :scala}})
+  (atom {:foo "bar" :langs #{:clojure :jruby :scala}})
 }}
 $state_rb name_of_state {{
   {:foo => "bar", :langs => [:clojure, :jruby, :scala]}
@@ -59,12 +59,18 @@ public class AdvancedExample {
     public static void sayHelloToEveryoneLoudly(List<String> names, String punctuation) {
         $def_clojure say-hello-to-everyone-loudly(arr-of-names : java.util.List<java.lang.String>, punctuation : String) : void {{
             (try-me)
-            (println (str "Foo from mutable state is: " (:foo @(.nameOfState this))))
+            (println (str "Foo from mutable state: " (:foo @(.nameOfState this))))
+            (swap! (.nameOfState this) assoc :foo "has been changed")
             (let [names (map #(upper-case %) arr-of-names)]
               (doseq [n names]
                 (println (str "Hello, " n punctuation))))
         }}
-        $clj_say-hello-to-everyone-loudly(names, "!!!");
+        $clj_say-hello-to-everyone-loudly(names, "!!");
+        $clj_class foo = new $clj_class();
+        System.out.println("First call from an *instance* of AdvancedExampleClj:");
+        foo.sayHelloToEveryoneLoudly(names, "!!!!");
+        System.out.println("Second call from an *instance* of AdvancedExampleClj, with state changed:");
+        foo.sayHelloToEveryoneLoudly(names, "!!!!!!");
     }
 
     public static Integer squareThenDivideByTwo(Integer x) {
@@ -73,6 +79,8 @@ public class AdvancedExample {
             x * x
         }}
         Integer aSquare = $rb_square_nums(x);
+        // $rb_class foo = new $rb_class();
+        // Integer aSquare = foo.squareNums(x);
         return aSquare / 2;
     }
 
@@ -84,6 +92,8 @@ public class AdvancedExample {
           x * 8
         }}
         Integer myNum = $sc_timesEight(x);
+        // $sc_class foo = new $sc_class();
+        // Integer myNum = foo.timesEight(x);
         return myNum;
     }
 
@@ -117,7 +127,7 @@ public class AdvancedExample {
         ns.add("Niles");
         ns.add("Frasier");
 
-        $clj_say-hello-to-everyone-loudly(ns, "!!!!!");
+        sayHelloToEveryoneLoudly(ns, "!!!!!");
 
         Integer x = squareThenDivideByTwo(9);
         System.out.println("9 squared then divided by two from Ruby is " + x);
